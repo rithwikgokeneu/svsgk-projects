@@ -25,13 +25,13 @@ header .box{width:min(1140px,100% - 32px);margin-inline:auto;display:flex;align-
 
 /* ---------- hero ---------- */
 .hero{position:relative;height:100vh;min-height:560px;max-height:900px;background:#0b1b29 center/cover no-repeat}
-.permit{position:absolute;left:50%;bottom:56px;transform:translateX(-50%);display:flex;align-items:center;gap:24px;background:#F6F6F6;border:1px solid var(--line);border-radius:24px;padding:12px 12px 12px 28px;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
+.permit{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:flex;align-items:center;gap:24px;background:#F6F6F6;border:1px solid var(--line);border-radius:24px;padding:12px 12px 12px 28px;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
 .permit .pl{font-family:var(--head);font-weight:700;color:var(--brand);font-size:15px;line-height:1.15;text-align:center;max-width:120px}
 .permit .tbl{background:#fff;border:1px solid var(--line);padding:4px 6px;text-align:right}
 .permit .tbl small{display:block;font-size:12px;line-height:16px;padding:1px 0;border-bottom:1px solid var(--line);color:#000}
 .permit .tbl small:last-child{border-bottom:0}
 .permit .tbl small b{font-weight:600}
-.down{position:absolute;right:28px;bottom:60px;width:36px;height:36px;border-radius:50%;background:#000;border:1px solid #fff;display:grid;place-items:center}
+.down{position:absolute;right:28px;bottom:20px;width:36px;height:36px;border-radius:50%;background:#000;border:1px solid #fff;display:grid;place-items:center}
 .down svg,.totop svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* ---------- overview ---------- */
@@ -142,7 +142,7 @@ h1.main{font-family:var(--head);font-size:30px;font-weight:600;line-height:36px;
 .rc .vd{margin-top:10px;background:var(--green);color:#fff;font-size:14px;font-weight:500;line-height:20px;text-transform:uppercase;padding:6px 18px;border-radius:999px}
 
 /* ---------- footer (same as svsgkrealty.com) ---------- */
-footer{background:#00AEAE;color:#fff;font-family:Raleway,sans-serif;padding-bottom:40px}
+footer{background:#00AEAE;color:#fff;font-family:Raleway,sans-serif}
 .ftw{width:min(1140px,100% - 32px);margin-inline:auto}
 .ft{display:grid;grid-template-columns:285px 255px 285px 1fr;padding:60px 0 70px}
 .ft>div{padding:10px 0 0 40px;display:flex;flex-direction:column;gap:20px}
@@ -156,16 +156,7 @@ footer{background:#00AEAE;color:#fff;font-family:Raleway,sans-serif;padding-bott
 .social svg{width:22px;height:22px;fill:#fff}
 .social a.li svg{fill:#0A66C2}
 
-/* ---------- fixed bottom section bar ---------- */
-.sbar{position:fixed;left:0;right:0;bottom:0;z-index:45;height:40px;background:var(--blue);box-shadow:0 10px 15px -3px rgba(0,0,0,.1);display:flex;justify-content:center;overflow-x:auto;scrollbar-width:none}
-.sbar::-webkit-scrollbar{display:none}
-.sbar .in{display:flex;align-items:center;min-width:max-content;padding:4px 12px}
-.sbar a{padding:0 8px;font-size:14px;line-height:20px;color:#fff;text-transform:uppercase;border-bottom:2px solid transparent}
-.sbar a.on{border-bottom-color:#fff}
-.sbar .sep{width:1px;height:20px;background:rgba(255,255,255,.55);margin:0 12px}
-.sbar .enq{background:var(--green);border:2px solid #fff;border-radius:999px;padding:4px 12px;font-size:14px;line-height:20px;color:#fff;text-transform:uppercase;margin-left:4px}
-
-.totop{position:fixed;right:24px;bottom:58px;z-index:44;width:44px;height:44px;border-radius:50%;background:#4b4b4b;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.totop{position:fixed;right:24px;bottom:24px;z-index:44;width:44px;height:44px;border-radius:50%;background:#4b4b4b;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .3s}
 .totop.show{opacity:1;pointer-events:auto}
 
 /* ---------- enquiry modal ---------- */
@@ -243,6 +234,5 @@ dialog.lb::backdrop{background:rgba(0,0,0,.9)}
   .rc .im{height:230px}
   .ft{grid-template-columns:1fr}
   .ft>div{padding-left:10px}
-  .sbar{justify-content:flex-start}
-  .totop{right:14px;bottom:52px}
+  .totop{right:14px;bottom:16px}
 }

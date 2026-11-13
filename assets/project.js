@@ -7,23 +7,9 @@
   burger.addEventListener('click', () => burger.setAttribute('aria-expanded', menu.classList.toggle('open')));
   $$('#menu a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
 
-  // nav shrink, back-to-top, bottom bar active section
+  // back-to-top button
   const top = $('#totop');
-  const links = $$('#sbar a');
-  const secs = links.map(a => $(a.getAttribute('href')));
-  const onScroll = () => {
-    top.classList.toggle('show', scrollY > 600);
-    let cur = secs[0];
-    secs.forEach(s => { if (s.getBoundingClientRect().top < 160) cur = s; });
-    links.forEach(a => {
-      const on = a.getAttribute('href') === '#' + cur.id;
-      if (on && !a.classList.contains('on')) {
-        const bar = a.closest('.sbar');
-        bar.scrollTo({ left: a.offsetLeft - bar.clientWidth / 2 + a.clientWidth / 2, behavior: 'smooth' });
-      }
-      a.classList.toggle('on', on);
-    });
-  };
+  const onScroll = () => top.classList.toggle('show', scrollY > 600);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // generic tab groups
