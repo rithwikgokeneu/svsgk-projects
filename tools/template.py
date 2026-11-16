@@ -141,10 +141,10 @@ def render(p, others, I):
         <li class="mx"><button type="button" data-navclose aria-label="Close menu">&#x2715;</button></li>
         <li><a href="{SITE}/">Home</a></li>
         <li><a href="{SITE}/about-us/">About us</a></li>
+        <li><a href="../" class="on">Projects</a></li>
         <li><a href="{SITE}/gallery/">Gallery</a></li>
-        <li><a href="../" class="on">Project</a></li>
-        <li><a href="{SITE}/blogs/">Blogs</a></li>
         <li><a href="https://nri.svsgkrealty.com/">NRI</a></li>
+        <li><a href="{SITE}/blogs/">Blogs</a></li>
         <li class="mc"><a href="#" data-enq>Contact Us</a></li>
       </ul>
       <a href="#" class="cta" data-enq>Contact us</a>
@@ -233,11 +233,13 @@ def render(p, others, I):
     <div>
       <h3>Impotant Links</h3>
       <ul>
+        <li><a href="{SITE}/">Home</a></li>
         <li><a href="{SITE}/about-us/">About us</a></li>
+        <li><a href="../">Projects</a></li>
         <li><a href="{SITE}/gallery/">Gallery</a></li>
-        <li><a href="https://nri.svsgkrealty.com/">Invest</a></li>
+        <li><a href="https://nri.svsgkrealty.com/">NRI</a></li>
+        <li><a href="{SITE}/blogs/">Blogs</a></li>
         <li><a href="{SITE}/terms-and-condition/">Terms and condition</a></li>
-        <li><a href="../">Project</a></li>
       </ul>
     </div>
     <div>
