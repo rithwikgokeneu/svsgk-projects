@@ -27,6 +27,7 @@ header .box{display:flex;align-items:center;justify-content:space-between;backgr
 .nav a{display:block;padding:13px 20px;font-family:Raleway,sans-serif;font-size:16px;font-weight:600;line-height:18.78px;color:#000;transition:color .2s}
 .nav a:hover,.nav a.on{color:var(--roof)}
 .cta{background:#fff;color:#000;font-family:Roboto,sans-serif;font-size:15px;font-weight:500;line-height:15px;padding:12px 24px;border-radius:30px}
+.nav .mx,.nav .mc{display:none}
 .burger{display:none;background:#fff;border:0;border-radius:50px;padding:12px 14px;cursor:pointer}
 .burger i{display:block;width:22px;height:2px;background:#000;box-shadow:0 -7px 0 #000,0 7px 0 #000}
 
@@ -74,9 +75,26 @@ footer{background:var(--teal);color:#fff;font-family:Raleway,sans-serif;margin-t
 .social a.li svg{fill:#0A66C2}
 
 @media(max-width:1024px){
-  .nav,.cta{display:none}
-  .burger{display:block}
-  .nav.open{display:flex;flex-direction:column;position:absolute;top:100%;left:16px;right:16px;border-radius:20px;padding:8px}
+  .cta{display:none}
+  /* mobile header: transparent bar, logo + staggered burger, full-screen slide-in menu */
+  header{inset:0 0 auto;padding:12px 10px 28px;background:none}
+  header .box{background:none;padding:6px 4px}
+  .burger{display:block;background:none;border:0;padding:14px 6px}
+  .burger i{position:relative;display:block;width:26px;height:3px;border-radius:3px;background:#000;box-shadow:none}
+  .burger i::before,.burger i::after{content:"";position:absolute;left:0;height:3px;border-radius:3px;background:#000}
+  .burger i::before{top:-8px;width:30px}
+  .burger i::after{top:8px;width:19px}
+  .nav{display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;left:auto;width:min(320px,82vw);z-index:60;margin:0;border-radius:0;background:#DCF0FC;padding:76px 8px 32px;box-shadow:-12px 0 32px rgba(0,0,0,.18);overflow-y:auto;transform:translateX(100%);visibility:hidden;transition:transform .4s cubic-bezier(.2,.8,.2,1),visibility 0s .4s}
+  .nav.open{transform:none;visibility:visible;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+  .nav a{font-size:20px;font-weight:500;line-height:24px;padding:12px 32px}
+  .nav .mx{display:block;position:absolute;top:16px;right:16px}
+  .nav .mx button{width:44px;height:44px;font-size:24px;line-height:1;color:#8F665E;background:none;border:0;cursor:pointer}
+  .nav .mc{display:block;align-self:center;margin-top:28px}
+  .nav .mc a{background:#fff;border-radius:40px;padding:16px 32px;color:#000}
+  body.nav-open{overflow:hidden}
+  body.nav-open header{z-index:70}
+  header::after{content:"";position:fixed;inset:0;z-index:-1;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .35s}
+  body.nav-open header::after{opacity:1;pointer-events:auto}
   .ft{grid-template-columns:1fr 1fr;gap:30px 0}
 }
 @media(max-width:600px){
@@ -97,12 +115,14 @@ footer{background:var(--teal);color:#fff;font-family:Raleway,sans-serif;margin-t
     <div class="box">
       <a href="https://svsgkrealty.com/" class="logo" aria-label="SVSGK Realty home"><img src="assets/svsgk-logo.webp" alt="SVSGK Realty" width="66" height="65"></a>
       <ul class="nav" id="nav">
+        <li class="mx"><button type="button" data-navclose aria-label="Close menu">&#x2715;</button></li>
         <li><a href="https://svsgkrealty.com/">Home</a></li>
         <li><a href="https://svsgkrealty.com/about-us/">About us</a></li>
         <li><a href="https://svsgkrealty.com/gallery/">Gallery</a></li>
         <li><a href="https://svsgkrealty.com/project/" class="on">Project</a></li>
         <li><a href="https://svsgkrealty.com/blogs/">Blogs</a></li>
         <li><a href="https://nri.svsgkrealty.com/">NRI</a></li>
+        <li class="mc"><a href="https://wa.me/919849630690" target="_blank" rel="noopener">Contact Us</a></li>
       </ul>
       <a href="https://wa.me/919849630690" class="cta" target="_blank" rel="noopener">Contact us</a>
       <button class="burger" id="burger" aria-label="Open menu"><i></i></button>
@@ -195,7 +215,12 @@ tabs.forEach(t=>t.addEventListener('click',()=>{
   tabs.forEach(x=>{const on=x===t;x.classList.toggle('active',on);x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).classList.toggle('active',on);});
 }));
 tabs.forEach(t=>t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t.click();}}));
-document.getElementById('burger').addEventListener('click',()=>document.getElementById('nav').classList.toggle('open'));
+const burger=document.getElementById('burger'),nav=document.getElementById('nav');
+const setMenu=on=>{nav.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);burger.setAttribute('aria-expanded',on);};
+burger.addEventListener('click',()=>setMenu(!nav.classList.contains('open')));
+nav.querySelectorAll('a,[data-navclose]').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false);});
+document.addEventListener('click',e=>{if(nav.classList.contains('open')&&!nav.contains(e.target)&&!burger.contains(e.target)){e.preventDefault();setMenu(false);}});
 </script>
 </body>
 </html>

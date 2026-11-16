@@ -4,12 +4,22 @@
 
   // mobile menu
   const burger = $('#burger'), menu = $('#menu');
-  burger.addEventListener('click', () => burger.setAttribute('aria-expanded', menu.classList.toggle('open')));
-  $$('#menu a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+  const setMenu = on => { menu.classList.toggle('open', on); document.body.classList.toggle('nav-open', on); burger.setAttribute('aria-expanded', on); };
+  burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+  $$('#menu a, #menu [data-navclose]').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', ev => { if (ev.key === 'Escape') setMenu(false); });
+  document.addEventListener('click', ev => { if (menu.classList.contains('open') && !menu.contains(ev.target) && !burger.contains(ev.target)) { ev.preventDefault(); setMenu(false); } });
 
   // back-to-top button
   const top = $('#totop');
-  const onScroll = () => top.classList.toggle('show', scrollY > 600);
+  // mobile call/WhatsApp dock: shows after hero, tucks away when footer (with full contacts) is on screen
+  const dock = $('#dock'), hero = $('.hero'), foot = $('footer');
+  let footIn = false;
+  const onScroll = () => {
+    top.classList.toggle('show', scrollY > 600);
+    if (dock) dock.classList.toggle('show', scrollY > hero.offsetHeight * .6 && !footIn);
+  };
+  if (dock && foot) new IntersectionObserver(([en]) => { footIn = en.isIntersecting; onScroll(); }).observe(foot);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // generic tab groups
